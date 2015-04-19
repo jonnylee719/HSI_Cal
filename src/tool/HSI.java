@@ -21,6 +21,11 @@
  */
 package tool;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Scanner;
+
 /**
  *
  * @author user
@@ -30,8 +35,41 @@ public class HSI {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) throws Exception{
+    try {
+    //declare a String variable to store the url
+    String addr ="http://www.cse.cuhk.edu.hk/csci1530/assignment/HSI.txt";
+    
+    //New a URL object
+    URL link = new URL(addr);
+    
+    //Associate the scanner object to stream object
+    Scanner dataStream = new Scanner(link.openStream());
+    
+    //Read a whole line
+    String line1 = dataStream.nextLine();
+    String line2 = dataStream.nextLine();
+    int[] day = new int[4000]; //declare & initialize new array for dates
+    double [] hsi = new double [4000];
+    if ( dataStream.hasNextInt()){
+        int day2 = dataStream.nextInt();
+        double hsi2 = dataStream.nextDouble();
+    }
+    
+    for (int i = 0; i < 4000; i++){
+        System.out.print( day[i] );
+        System.out.println(hsi);
+    }
+    
+    
+    
+    
+    }catch (FileNotFoundException e){
+        System.out.println("File cannot be opened");
+    }catch (IOException e){
+        System.out.println("I/O error! Program exit.");
+    }   
+    
     }
     
 }
