@@ -73,31 +73,48 @@ public class HSI {
     
     //locate the array number of the Start Date
     int j = 0;
-    while (day[j] != startDate){
+    while (day[j] != startDate && j <= endIndex){
         j++;
     }
     int startIndex = j;
     
-    //Calculate number of record between startIndex and endIndex for array size
+//Calculate number of record between startIndex and endIndex for array size
     int recordNum = endIndex - startIndex + 1;
     
     // if recordNum equals to 1, then there's no need for any calculation at all
+    if (recordNum == 1){
     System.out.println("HSI from " + startDate + " to " + day[endIndex]);
     System.out.println("Number of record: " + recordNum);
     System.out.println("Max: " + hsi[startIndex]);
     System.out.println("Min: " + hsi[startIndex]);
     System.out.println("Average: " + hsi[startIndex]);
     System.out.println("Median: " + hsi[startIndex]);
+    return;
+    }
     
     //Build new array specific to User's request
-    int[] userArrayDay = new int[(recordNum - 1)];
+    double[] userArray = new double[recordNum];
     
     //Store relevant values into new array
-    for (int i = 0; i < (recordNum-1); i++){
-        userArrayDay[i] = day[startIndex];
-        startIndex++;
+    int cnt = startIndex;
+    for (int i = 0; i < recordNum; i++){
+        userArray[i] = hsi[cnt];
+        cnt++;
     }
         
+    // use sorter class to sort the userArray to userHsi
+    Sorter Sort = new Sorter();
+    double[] userHsi = Sort.selectionSort(userArray, recordNum);
+    
+        
+    //use calculator to calculate and print all required results
+    Calculator cal = new Calculator();
+    System.out.println("HSI from " + day[startIndex] + " to " + day[endIndex]);
+    System.out.println("Number of records: " + recordNum);
+    System.out.println("Max: " + cal.maxCal(userArray, recordNum));
+    System.out.println("Min: " + cal.minCal(userArray));
+    System.out.println("Average: " + cal.avgCal(userArray, recordNum));
+    System.out.println("Median: " + cal.medianCal(userArray, recordNum));
     
     
     }catch (FileNotFoundException e){

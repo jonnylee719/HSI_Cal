@@ -25,10 +25,33 @@ package tool;
  *
  * @author user
  */
-public class SelectionSorter {
+public class Sorter {
     
     // This objects uses selection sort to sort an array
     
+    // Selection sort method
+    public double[] selectionSort (double [] inputArray, int arraySize){
+        double [] userArray = new double[arraySize];
+        userArray = inputArray;
+        int round, pt,   size = arraySize;
+        
+        for (round = 0; round < (size - 1); round++){
+            
+            for (pt = (round + 1); pt < size; pt++){
+                
+                if (userArray[pt] < userArray[round]){
+                    double temp = userArray[pt]; 
+                    userArray[pt] = userArray[round];
+                    userArray[round] = temp;
+                }
+                    
+                
+            }
+            
+        }
+        
+        return userArray;
+    }
     
     
 }
